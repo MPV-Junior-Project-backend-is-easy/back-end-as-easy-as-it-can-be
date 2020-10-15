@@ -24,16 +24,16 @@ class Login extends Component {
           provided you with an easy step by step tutorials for a bunch of
           courses including NodeJs - ExpressJs - MongoDb.to get started please
           create an account if u don t have one or simply login and start
-          learning it's for free
+          learning it's for free.
         </h3>
-        <form>
+        <div>
           <input type="text" />
           <input type="text" />
           <br></br>
           <button id="signin" onClick={this.showSingin.bind(this)}>sign in</button>
           <button id="login">login</button>
           {this.state.signedIn && <Signin />}
-        </form>
+        </div>
       </div>
     );
   }

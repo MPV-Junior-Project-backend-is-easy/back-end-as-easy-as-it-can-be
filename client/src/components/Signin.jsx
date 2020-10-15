@@ -6,16 +6,16 @@ class Signin extends Component {
     super(props);
     this.state = {
       data: [],
-      username: "",
+      userName: "",
       password: "",
       id: 0,
     };
     this.signIn = this.signIn.bind(this);
     this.changePassword = this.changePassword.bind(this);
-    this.changeUserName = this.changeUserName.bind(this);
+    this.changeuserName = this.changeuserName.bind(this);
   }
-  changeUserName(event) {
-    this.setState({ username: event.target.value });
+  changeuserName(event) {
+    this.setState({ userName: event.target.value });
   }
   changePassword(event) {
     this.setState({ password: event.target.value });
@@ -26,7 +26,7 @@ class Signin extends Component {
       .then((res) => {
         this.setState({
           data: res.data,
-          username: "",
+          userName: "",
           password: "",
           id: 0,
         });
@@ -39,7 +39,7 @@ class Signin extends Component {
     if (id === 0) {
       axios
         .post("http://localhost:3000/users", {
-          username: this.state.username,
+          userName: this.state.userName,
           password: this.state.password,
         })
         .then(() => this.componentDidMount())
@@ -51,12 +51,11 @@ class Signin extends Component {
   render() {
     return (
       <div>
-        <form>
           <input
             type="text"
-            placeholder="username"
-            value={this.state.username}
-            onChange={this.changeUserName}
+            placeholder="userName"
+            value={this.state.userName}
+            onChange={this.changeuserName}
           ></input>
           <input
             type="password"
@@ -66,11 +65,10 @@ class Signin extends Component {
           ></input>
           <button
             id="sign"
-            onClick={(event) => this.Signin(event, this.state.id)}
+            onClick={(event) => this.signIn(event,this.state.id)}
           >
             Sign in
           </button>
-        </form>
       </div>
     );
   }
