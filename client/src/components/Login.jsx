@@ -24,7 +24,7 @@ class Login extends Component {
           provided you with an easy step by step tutorials for a bunch of
           courses including NodeJs - ExpressJs - MongoDb.to get started please
           create an account if u don t have one or simply login and start
-          learning it's for free
+          learning it's for free.
         </h3>
         <div>
           <input type="text" />
