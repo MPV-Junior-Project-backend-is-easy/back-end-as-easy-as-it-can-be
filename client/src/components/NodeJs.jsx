@@ -5,6 +5,7 @@ class NodeJs extends Component {
     super(props);
     this.state = {
       data: [],
+      user : this.props.name
     };
     this.done = this.done.bind(this);
   }

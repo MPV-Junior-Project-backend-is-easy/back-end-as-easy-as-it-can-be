@@ -5,7 +5,8 @@ class MongoDB extends Component {
     super(props);
     this.state = {
       data: [],
-      dataSteps : []
+      dataSteps : [],
+      user : this.props.name
     };
     this.done= this.done.bind(this);
   }
