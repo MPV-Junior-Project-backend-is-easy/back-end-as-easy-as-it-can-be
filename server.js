@@ -9,7 +9,10 @@ app.use(express.json());
 app.use(express.static("client/dist"));
 
 app.use("/users", require("./routes/users"));
-app.use("/videos", require("./routes/videos"));
+app.use("/videosNode", require("./routes/videosNode"));
+app.use("/videosMongo", require("./routes/videosMongo"));
+app.use("/videosExpress", require("./routes/videosExpress"));
+
 
 app.listen(port, () => {
   console.log(`server listening on port http://localhost:${port}`);
