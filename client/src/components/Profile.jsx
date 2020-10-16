@@ -11,41 +11,23 @@ export default class Profile extends Component {
     this.renderExpressTut = this.renderExpressTut.bind(this);
     this.renderMongoTut = this.renderMongoTut.bind(this);
     this.renderNodeTut = this.renderNodeTut.bind(this);
-    this.backHome= this.backHome.bind(this);
+    this.backHome = this.backHome.bind(this);
   }
   renderNodeTut(event) {
     event.preventDefault();
-    if (
-      this.state.check === "" ||
-      this.state.check === "Mongo" ||
-      this.state.check === "Express"
-    ) {
-      this.setState({ check: "Node" });
-    }
+    this.setState({ check: "Node" });
   }
   renderMongoTut(event) {
     event.preventDefault();
-    if (
-      this.state.check === "" ||
-      this.state.check === "Node" ||
-      this.state.check === "Express"
-    ) {
-      this.setState({ check: "Mongo" });
-    }
+    this.setState({ check: "Mongo" });
   }
   renderExpressTut(event) {
     event.preventDefault();
-    if (
-      this.state.check === "" ||
-      this.state.check === "Mongo" ||
-      this.state.check === "Node"
-    ) {
-      this.setState({ check: "Express" });
-    }
+    this.setState({ check: "Express" });
   }
-  backHome(event){
+  backHome(event) {
     event.preventDefault();
-    this.setState({check:''})
+    this.setState({ check: "" });
   }
 
   render() {
@@ -59,7 +41,7 @@ export default class Profile extends Component {
             <span>Score</span>
             <span onClick={this.backHome}>Home</span>
           </div>
-      <h3>welcome {this.props.name}</h3>
+          <h3>welcome {this.props.name}</h3>
           <p> Chooose from the courses above</p>
         </div>
       );
@@ -68,8 +50,8 @@ export default class Profile extends Component {
         <div>
           <div>
             <span onClick={this.renderNodeTut}>NodeJs</span>
-            <span>ExpressJs</span>
-            <span>MongoDB</span>
+            <span onClick={this.renderExpressTut}>ExpressJs</span>
+            <span onClick={this.renderMongoTut}>MongoDB</span>
             <span>Score</span>
             <span onClick={this.backHome}>Home</span>
           </div>
@@ -80,23 +62,23 @@ export default class Profile extends Component {
       return (
         <div>
           <div>
-            <span>NodeJs</span>
-            <span>ExpressJs</span>
+            <span onClick={this.renderNodeTut}>NodeJs</span>
+            <span onClick={this.renderExpressTut}>ExpressJs</span>
             <span onClick={this.renderMongoTut}>MongoDB</span>
             <span>Score</span>
             <span onClick={this.backHome}>Home</span>
           </div>
-          <MongoDB />
+          <MongoDB/>
         </div>
       );
     } else if (this.state.check === "Express") {
       return (
         <div>
           <div>
-            <span>NodeJs</span>
+            <span onClick={this.renderNodeTut}>NodeJs</span>
             <span onClick={this.renderExpressTut}>ExpressJs</span>
-            <span>MongoDB</span>
-            <span >Score</span>
+            <span onClick={this.renderMongoTut}>MongoDB</span>
+            <span>Score</span>
             <span onClick={this.backHome}>Home</span>
           </div>
           <ExpressJs />

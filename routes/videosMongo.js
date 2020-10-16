@@ -16,4 +16,8 @@ router.post("/", async (req, res) => {
   await videos.save();
   res.json("new video added");
 });
+router.put("/:id", async (req, res) => {
+  await VideoMongo.findByIdAndUpdate(req.params.id,req.body)
+  res.json("video updated");
+})
 module.exports = router;
