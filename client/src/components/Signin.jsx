@@ -1,79 +1,71 @@
-import Axios from "axios";
 import React, { Component } from "react";
 import axios from "axios";
-class Signin extends Component {
+import Login from "./Login.jsx"
+export default class Signin extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [],
-      username: "",
+      userName: "",
       password: "",
       id: 0,
+      check:""
     };
     this.signIn = this.signIn.bind(this);
     this.changePassword = this.changePassword.bind(this);
-    this.changeUserName = this.changeUserName.bind(this);
+    this.changeuserName = this.changeuserName.bind(this);
   }
-  changeUserName(event) {
-    this.setState({ username: event.target.value });
+  changeuserName(event) {
+    this.setState({ userName: event.target.value });
   }
   changePassword(event) {
     this.setState({ password: event.target.value });
   }
-  componentDidMount() {
-    axios
-      .get("http://localhost:3000/users")
-      .then((res) => {
-        this.setState({
-          data: res.data,
-          username: "",
-          password: "",
-          id: 0,
-        });
-      })
-      .catch((err) => console.log(err));
-  }
+  
 
-  signIn(event, id) {
+  signIn(event) {
     event.preventDefault();
-    if (id === 0) {
       axios
         .post("http://localhost:3000/users", {
-          username: this.state.username,
+          userName: this.state.userName,
           password: this.state.password,
         })
-        .then(() => this.componentDidMount())
-        .catch((err) => console.log(err));
-    } else {
-      alert('user already exists please try another name')
-    }
+        .then(() => this.setState({
+          userName: "",
+          password: "",
+          id: 0,
+          check:"login"
+        }))
+        .catch((err) => console.log(err,'errr'));
   }
   render() {
-    return (
-      <div>
-        <form>
-          <input
-            type="text"
-            placeholder="username"
-            value={this.state.username}
-            onChange={this.changeUserName}
-          ></input>
-          <input
-            type="password"
-            placeholder="Password"
-            value={this.state.password}
-            onChange={this.changePassword}
-          ></input>
-          <button
-            id="sign"
-            onClick={(event) => this.Signin(event, this.state.id)}
-          >
-            Sign in
-          </button>
-        </form>
-      </div>
-    );
+    if(this.state.check === ""){
+      return (
+        <div>
+            <input
+              type="text"
+              placeholder="userName"
+              value={this.state.userName}
+              onChange={this.changeuserName}
+            ></input>
+            <input
+              type="password"
+              placeholder="Password"
+              value={this.state.password}
+              onChange={this.changePassword}
+            ></input>
+            <button
+              id="sign"
+              onClick={(event) => this.signIn(event)}>createAnAccount</button>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Login/>
+        </div>
+      )
+    }
   }
 }
 
-export default Signin;

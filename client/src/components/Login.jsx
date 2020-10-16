@@ -1,42 +1,93 @@
 import React, { Component } from "react";
 import Signin from "./Signin.jsx";
-class Login extends Component {
+import Profile from "./Profile.jsx";
+import axios from "axios";
+export default class Login extends Component {
   constructor(props){
     super(props);
     this.state={
       data:[],
-      username:'',
+      userName:'',
       password:'',
-      signedIn:false,
+      check:''
     }
+    this.check = this.check.bind(this);
+    this.changeName = this.changeName.bind(this);
+    this.changePassword = this.changePassword.bind(this);
   }
-  showSingin(e){
-    e.preventDefault();
-    this.setState((prevState) => ({
-      signedIn: !prevState.signedIn
-    }));
+
+  changeName(event) {
+    this.setState({userName:event.target.value})
+  }
+  changePassword(event) {
+    this.setState({password:event.target.value})
+  }
+  componentDidMount() {
+    axios
+      .get("http://localhost:3000/users")
+      .then((res) => {
+        this.setState({
+          data: res.data,
+          userName: "",
+          password: "",
+          id: 0,
+          check:""
+        });
+      })
+      .catch((err) => console.log(err,'errr'));
+  }
+ 
+  check(event){
+    event.preventDefault();
+    const listName = this.state.data.map((name)=>
+    name.userName )
+    const listPassword = this.state.data.map((pass)=>
+    pass.password )
+    if(listName.indexOf(this.state.userName) === -1){
+      alert("don't have an account yet please create one")
+      this.setState({check:"signin"})
+    }else  if(listName.indexOf(this.state.userName) !== -1 && listPassword[listName.indexOf(this.state.userName)] !== this.state.password ){ 
+      alert("wrong password try again")
+    }else  if(listName.indexOf(this.state.userName) !== -1 && listPassword[listName.indexOf(this.state.userName)] === this.state.password ){
+      alert("Hello " + this.state.userName)
+      this.setState({check:"login"})
+    } 
   }
   render() {
+    if(this.state.check === ""){
+      return (
+        <div className="signIn">
+          <div>
+            <input
+              type="text"
+              placeholder="UserName"
+              value={this.state.userName}
+              onChange={this.changeName}
+            /><br></br>
+            <input
+              type="password"
+              name="password"
+              placeholder="password "
+              value={this.state.password}
+              onChange={this.changePassword}
+            /><br></br>
+            <button onClick = {(event)=> this.check(event)}>Get Started</button>
+            </div>
+        </div>
+      )
+    }else if(this.state.check === "signin"){
+      return (
+        <div>
+          <Signin/>
+        </div>
+      )
+    }else if(this.state.check === "login"){
     return (
       <div>
-        <h3 id="intro">
-          Welcome To BEAEAICB Here u can learn back-end from scratch . we
-          provided you with an easy step by step tutorials for a bunch of
-          courses including NodeJs - ExpressJs - MongoDb.to get started please
-          create an account if u don t have one or simply login and start
-          learning it's for free
-        </h3>
-        <form>
-          <input type="text" />
-          <input type="text" />
-          <br></br>
-          <button id="signin" onClick={this.showSingin.bind(this)}>sign in</button>
-          <button id="login">login</button>
-          {this.state.signedIn && <Signin />}
-        </form>
+          <Profile name={this.state.userName}/>
       </div>
-    );
+    )
+    }
   }
 }
 
-export default Login;
