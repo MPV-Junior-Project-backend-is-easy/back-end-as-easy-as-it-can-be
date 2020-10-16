@@ -24,7 +24,7 @@ class NodeJs extends Component {
         <ul>
           {this.state.data.map((video) => (
             <li key={video._id}>
-              {" "}
+              
               <center>
                 <video
                   width="640"
@@ -35,6 +35,7 @@ class NodeJs extends Component {
                 <br></br>
                 <center>
                   <input type="button" value="✓ check" />
+                  
                 </center>
               </center>
             </li>

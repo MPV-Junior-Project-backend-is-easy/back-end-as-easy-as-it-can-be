@@ -15,33 +15,21 @@ export default class Profile extends Component {
   }
   renderNodeTut(event) {
     event.preventDefault();
-    if (
-      this.state.check === "" ||
-      this.state.check === "Mongo" ||
-      this.state.check === "Express"
-    ) {
+     
       this.setState({ check: "Node" });
-    }
+    
   }
   renderMongoTut(event) {
     event.preventDefault();
-    if (
-      this.state.check === "" ||
-      this.state.check === "Node" ||
-      this.state.check === "Express"
-    ) {
+     
       this.setState({ check: "Mongo" });
-    }
+    
   }
   renderExpressTut(event) {
     event.preventDefault();
-    if (
-      this.state.check === "" ||
-      this.state.check === "Mongo" ||
-      this.state.check === "Node"
-    ) {
+     
       this.setState({ check: "Express" });
-    }
+    
   }
   backHome(event){
     event.preventDefault();
@@ -68,8 +56,8 @@ export default class Profile extends Component {
         <div>
           <div>
             <span onClick={this.renderNodeTut}>NodeJs</span>
-            <span>ExpressJs</span>
-            <span>MongoDB</span>
+            <span onClick={this.renderExpressTut}>ExpressJs</span>
+            <span onClick={this.renderNodeTut}>MongoDB</span>
             <span>Score</span>
             <span onClick={this.backHome}>Home</span>
           </div>
@@ -86,7 +74,6 @@ export default class Profile extends Component {
             <span>Score</span>
             <span onClick={this.backHome}>Home</span>
           </div>
-          <MongoDB />
         </div>
       );
     } else if (this.state.check === "Express") {
