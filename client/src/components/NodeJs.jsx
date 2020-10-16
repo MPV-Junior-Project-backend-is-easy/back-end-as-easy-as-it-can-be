@@ -6,6 +6,7 @@ class NodeJs extends Component {
     this.state = {
       data: [],
     };
+    this.done = this.done.bind(this);
   }
   componentDidMount() {
     axios
@@ -17,28 +18,34 @@ class NodeJs extends Component {
         throw err;
       });
   }
+  done(event,id) {
+    event.preventDefault();
+    axios.put(`http://localhost:3000/videosNode/${id}`,{check:'done'})
+    .then(()=>this.componentDidMount())
+    .catch(err => console.log(err,'errrr'));
+    
+  }
   render() {
     return (
       <div>
-        <p>node</p>
         <ul>
           {this.state.data.map((video) => (
-            <li key={video._id}>
+            <div key={video._id}>
               
               <center>
-                <video
+                <iframe
                   width="640"
                   height="480"
                   controls
                   src={video.url}
-                ></video>
+                ></iframe>
                 <br></br>
                 <center>
-                  <input type="button" value="✓ check" />
-                  
+                  <button onClick={(event) =>this.done(event,video._id)}>check ✓</button>
+          <p>{video.check}</p>
                 </center>
               </center>
-            </li>
+            </div>
           ))}
         </ul>
       </div>

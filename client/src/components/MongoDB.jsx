@@ -5,38 +5,53 @@ class MongoDB extends Component {
     super(props);
     this.state = {
       data: [],
+      dataSteps : []
     };
+    this.done= this.done.bind(this);
   }
+ 
+ 
   componentDidMount() {
     axios
       .get("http://localhost:3000/videosMongo")
       .then((res) => {
-        this.setState({ data: res.data });
+        this.setState({
+          data: res.data,
+        });
       })
       .catch((err) => {
         throw err;
       });
   }
+  done(event,id) {
+    event.preventDefault();
+    axios.put(`http://localhost:3000/videosMongo/${id}`,{check:'done'})
+    .then(()=>this.componentDidMount())
+    .catch(err => console.log(err,'errrr'));
+    
+  }
   render() {
     return (
       <div>
+       
         <ul>
           {this.state.data.map((video) => (
-            <li key={video._id}>
+            <div key={video._id}>
               {" "}
               <center>
-                <video
+                <iframe
                   width="640"
                   height="480"
                   controls
                   src={video.url}
-                ></video>
+                ></iframe>
                 <br></br>
                 <center>
-                  <input type="button" value="✓ check" />
+                <button onClick={(event) =>this.done(event,video._id)}>check ✓</button>
+                <p>{video.check}</p>
                 </center>
               </center>
-            </li>
+            </div>
           ))}
         </ul>
       </div>
