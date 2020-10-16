@@ -7,6 +7,7 @@ export default class Profile extends Component {
     super(props);
     this.state = {
       check: "",
+      name : this.props.name
     };
     this.renderExpressTut = this.renderExpressTut.bind(this);
     this.renderMongoTut = this.renderMongoTut.bind(this);
@@ -55,7 +56,7 @@ export default class Profile extends Component {
             <span>Score</span>
             <span onClick={this.backHome}>Home</span>
           </div>
-          <NodeJs />
+          <NodeJs name = {this.state.name}/>
         </div>
       );
     } else if (this.state.check === "Mongo") {
@@ -68,7 +69,7 @@ export default class Profile extends Component {
             <span>Score</span>
             <span onClick={this.backHome}>Home</span>
           </div>
-          <MongoDB />
+          <MongoDB  name = {this.state.name}/>
         </div>
       );
     } else if (this.state.check === "Express") {
@@ -81,7 +82,7 @@ export default class Profile extends Component {
             <span>Score</span>
             <span onClick={this.backHome}>Home</span>
           </div>
-          <ExpressJs />
+          <ExpressJs  name = {this.state.name}/>
         </div>
       );
     }

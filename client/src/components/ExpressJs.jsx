@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
+import CheckExpress from './CheckExpress.jsx';
 class ExpressJs extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [],
+      user : this.props.name
     };
+    this.done=this.done.bind(this);
   }
   componentDidMount() {
     axios
@@ -16,30 +19,40 @@ class ExpressJs extends Component {
       .catch((err) => {
         throw err;
       });
+      console.log(this.state,'stat')
+  }
+  done(event,id) {
+    event.preventDefault();
+    axios.put(`http://localhost:3000/videosExpress/${id}`,{check:'done'})
+    .then(()=>this.componentDidMount())
+    .catch(err => console.log(err,'errrr'));
+    
   }
   render() {
     return (
       <div>
-        <p>express</p>
+        
         <ul>
           {this.state.data.map((video) => (
-            <li key={video._id}>
+            <div key={video._id}>
               {" "}
               <center>
-                <video
+                <iframe
                   width="640"
                   height="480"
                   controls
                   src={video.url}
-                ></video>
+                ></iframe>
                 <br></br>
                 <center>
-                  <input type="button" value="✓ check" />
+                <button onClick={(event) =>this.done(event,video._id)}>check ✓</button>
+          <p>{video.check}</p>
                 </center>
               </center>
-            </li>
+            </div>
           ))}
         </ul>
+        <CheckExpress/>
       </div>
     );
   }

@@ -6,18 +6,11 @@ class MongoDB extends Component {
     this.state = {
       data: [],
       dataSteps : [],
-      steps : ""
+      user : this.props.name
     };
-    this.steps = this.steps.bind(this);
-    this.saveSteps = this.saveSteps.bind(this);
+    this.done= this.done.bind(this);
   }
-  steps(event){
-    // let p = document.getElementById("target")
-    // if(p.innerText.length === 0){
-    //   return;
-    // }
-    this.setState({steps: event.target.value})
-  }
+ 
  
   componentDidMount() {
     axios
@@ -30,46 +23,36 @@ class MongoDB extends Component {
       .catch((err) => {
         throw err;
       });
-      axios
-      .get("http://localhost:3000/steps")
-      .then((res) => {
-        this.setState({
-          dataSteps: res.data,
-          steps : ""
-        });
-      })
-      .catch((err) => {
-        throw err;
-      });
   }
-  saveSteps(event){
+  done(event,id) {
     event.preventDefault();
-    axios.post("http://localhost:3000/steps",{steps : this.state.steps})
-    .then(()=> this.componentDidMount())
-    .catch((err) => console.log(err,'errr'))
+    axios.put(`http://localhost:3000/videosMongo/${id}`,{check:'done'})
+    .then(()=>this.componentDidMount())
+    .catch(err => console.log(err,'errrr'));
+    
   }
   render() {
     return (
       <div>
-        <p>MongoDB</p>
+       
         <ul>
           {this.state.data.map((video) => (
-            <li key={video._id}>
+            <div key={video._id}>
               {" "}
               <center>
-                <video
+                <iframe
                   width="640"
                   height="480"
                   controls
                   src={video.url}
-                ></video>
+                ></iframe>
                 <br></br>
                 <center>
-                  <input type="button" value="✓ check" />
-          <p id ="target">{this.state.steps}</p>
+                <button onClick={(event) =>this.done(event,video._id)}>check ✓</button>
+                <p>{video.check}</p>
                 </center>
               </center>
-            </li>
+            </div>
           ))}
         </ul>
       </div>
