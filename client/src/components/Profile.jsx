@@ -68,7 +68,7 @@ export default class Profile extends Component {
             <span>Score</span>
             <span onClick={this.backHome}>Home</span>
           </div>
-          <MongoDB />
+          <MongoDB/>
         </div>
       );
     } else if (this.state.check === "Express") {

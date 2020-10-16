@@ -20,32 +20,32 @@ class NodeJs extends Component {
   }
   done(event,id) {
     event.preventDefault();
-    axios.put(`http://localhost:3000/${id}`,{check:'done'})
+    axios.put(`http://localhost:3000/videosNode/${id}`,{check:'done'})
     .then(()=>this.componentDidMount())
+    .catch(err => console.log(err,'errrr'));
     
   }
   render() {
     return (
       <div>
-        <p>node</p>
         <ul>
           {this.state.data.map((video) => (
-            <li key={video._id}>
-              {" "}
+            <div key={video._id}>
+              
               <center>
-                <video
+                <iframe
                   width="640"
                   height="480"
                   controls
                   src={video.url}
-                ></video>
+                ></iframe>
                 <br></br>
                 <center>
                   <button onClick={(event) =>this.done(event,video._id)}>check ✓</button>
           <p>{video.check}</p>
                 </center>
               </center>
-            </li>
+            </div>
           ))}
         </ul>
       </div>

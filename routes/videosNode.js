@@ -12,14 +12,14 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   videos = new VideoNode({
     title: req.body.title,
-    url: req.body.url
+    url: req.body.url,
   });
   await videos.save();
   res.json("new video added");
 });
 
 router.put("/:id", async (req, res) => {
-  await Videos.findByIdAndUpdate(req.params.id,req.body)
+  await VideoNode.findByIdAndUpdate(req.params.id,req.body)
   res.json("video updated");
 })
 // router.delete("/:id", async (req, res) => {
