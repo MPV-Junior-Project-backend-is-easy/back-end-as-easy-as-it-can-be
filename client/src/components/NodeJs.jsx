@@ -6,6 +6,7 @@ class NodeJs extends Component {
     this.state = {
       data: [],
     };
+    this.done = this.done.bind(this);
   }
   componentDidMount() {
     axios
@@ -16,6 +17,12 @@ class NodeJs extends Component {
       .catch((err) => {
         throw err;
       });
+  }
+  done(event,id) {
+    event.preventDefault();
+    axios.put(`http://localhost:3000/${id}`,{check:'done'})
+    .then(()=>this.componentDidMount())
+    
   }
   render() {
     return (
@@ -34,7 +41,8 @@ class NodeJs extends Component {
                 ></video>
                 <br></br>
                 <center>
-                  <input type="button" value="✓ check" />
+                  <button onClick={(event) =>this.done(event,video._id)}>check ✓</button>
+          <p>{video.check}</p>
                 </center>
               </center>
             </li>

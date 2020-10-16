@@ -18,6 +18,10 @@ router.post("/", async (req, res) => {
   res.json("new video added");
 });
 
+router.put("/:id", async (req, res) => {
+  await Videos.findByIdAndUpdate(req.params.id,req.body)
+  res.json("video updated");
+})
 // router.delete("/:id", async (req, res) => {
 //   await Videos.findByIdAndDelete(req.params.id);
 //   res.json("video deleted");
