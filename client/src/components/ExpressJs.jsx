@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
+import CheckExpress from './CheckExpress.jsx';
 class ExpressJs extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [],
+      user : this.props.name
     };
     this.done=this.done.bind(this);
   }
@@ -17,6 +19,7 @@ class ExpressJs extends Component {
       .catch((err) => {
         throw err;
       });
+      console.log(this.state,'stat')
   }
   done(event,id) {
     event.preventDefault();
@@ -49,6 +52,7 @@ class ExpressJs extends Component {
             </div>
           ))}
         </ul>
+        <CheckExpress/>
       </div>
     );
   }
