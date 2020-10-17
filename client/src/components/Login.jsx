@@ -76,7 +76,7 @@ export default class Login extends Component {
               value={this.state.password}
               onChange={this.changePassword}
             /><br></br>
-            <button onClick = {(event)=> this.check(event)}>Get Started</button>
+            <button  id='bb' onClick = {(event)=> this.check(event)}>Get Started</button>
             </div>
         </div></center>
       )

@@ -9,7 +9,7 @@ class ExpressJs extends Component {
       user : this.props.name,
       checkpoint:'hidden',
     };
-    this.done=this.done.bind(this);
+    
     this.getCheckpoint=this.getCheckpoint.bind(this)
   }
   componentDidMount() {
@@ -21,15 +21,9 @@ class ExpressJs extends Component {
       .catch((err) => {
         throw err;
       });
-      console.log(this.state,'stat')
+      
   }
-  done(event,id) {
-    event.preventDefault();
-    axios.put(`http://localhost:3000/videosExpress/${id}`,{check:'done'})
-    .then(()=>this.componentDidMount())
-    .catch(err => console.log(err,'errrr'));
-    
-  }
+  
   getCheckpoint(event){
     event.preventDefault();
     this.setState({checkpoint:'displayed'})
@@ -51,15 +45,12 @@ class ExpressJs extends Component {
                   src={video.url}
                 ></iframe>
                 <br></br>
-                <center>
-                <button onClick={(event) =>this.done(event,video._id)}>check ✓</button>
-          <p>{video.check}</p>
-                </center>
+              
               </center>
             </div>
           ))}
         </ul>
-        <div > <center><button onClick={(event)=>this.getCheckpoint(event)}>finished</button></center></div>
+        <div > <center><button id='bb'  onClick={(event)=>this.getCheckpoint(event)}>finished</button></center></div>
       </div>
     );}
     else {
