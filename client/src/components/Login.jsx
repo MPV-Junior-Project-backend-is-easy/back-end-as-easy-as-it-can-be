@@ -7,6 +7,7 @@ export default class Login extends Component {
     super(props);
     this.state={
       data:[],
+      idUser:"",
       userName:'',
       password:'',
       check:''
@@ -30,10 +31,12 @@ export default class Login extends Component {
           data: res.data,
           userName: "",
           password: "",
+
           check:""
         });
       })
       .catch((err) => console.log(err,'errr'));
+      
   }
  
   check(event){
@@ -42,6 +45,7 @@ export default class Login extends Component {
     name.userName )
     const listPassword = this.state.data.map((pass)=>
     pass.password )
+    // const list = this.state.data.map((item)=> (item._id))
     if(listName.indexOf(this.state.userName) === -1){
       alert("don't have an account yet please create one")
       this.setState({check:"signin"})
@@ -55,7 +59,9 @@ export default class Login extends Component {
   render() {
     if(this.state.check === ""){
       return (
-        <div className="signIn">
+        <center>
+          <h1> Hello Friend !!! </h1>
+        <div className="login">
           <div>
             <input
               type="text"
@@ -72,19 +78,22 @@ export default class Login extends Component {
             /><br></br>
             <button onClick = {(event)=> this.check(event)}>Get Started</button>
             </div>
-        </div>
+        </div></center>
       )
     }else if(this.state.check === "signin"){
       return (
+        <center>
         <div>
           <Signin/>
-        </div>
+        </div></center>
       )
     }else if(this.state.check === "login"){
     return (
+      <center>
       <div>
           <Profile name={this.state.userName}/>
       </div>
+      </center>
     )
     }
   }
