@@ -31,7 +31,7 @@ export default class Login extends Component {
           data: res.data,
           userName: "",
           password: "",
-          idUser: "",
+
           check:""
         });
       })
