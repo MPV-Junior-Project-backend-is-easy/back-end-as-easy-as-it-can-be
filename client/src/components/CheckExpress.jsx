@@ -4,6 +4,7 @@ class CheckExpress extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      user : this.props.name,
       countRightAnswers: 0,
       show:""
     };

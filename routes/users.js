@@ -19,6 +19,10 @@ router.post("/", async (req, res) => {
   user = new User({
     userName: req.body.userName,
     password: req.body.password,
+    // resNode : res.body.resNode,
+    // resExpress : res.body.resExpress,
+    // resMongoo : res.body.resMongoo,
+
   });
   await user.save();
   res.json("new user added");
