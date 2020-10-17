@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import axios from "axios";
+import CheckMongo from './CheckMongo.jsx';
 class MongoDB extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [],
-      dataSteps : []
+      user : this.props.name,
+      checkpoint:'hidden',
     };
     this.done= this.done.bind(this);
+    this.getCheckpoint=this.getCheckpoint.bind(this)
   }
  
  
@@ -30,7 +33,12 @@ class MongoDB extends Component {
     .catch(err => console.log(err,'errrr'));
     
   }
+  getCheckpoint(event){
+    event.preventDefault();
+    this.setState({checkpoint:'displayed'})
+  }
   render() {
+    if(this.state.checkpoint==='hidden'){
     return (
       <div>
        
@@ -54,9 +62,13 @@ class MongoDB extends Component {
             </div>
           ))}
         </ul>
+        <div > <center><button onClick={(event)=>this.getCheckpoint(event)}>finished</button></center></div>
       </div>
+      
     );
   }
+  else{return(<CheckMongo name={this.state.user}/>)}
+       }
 }
 
 export default MongoDB;

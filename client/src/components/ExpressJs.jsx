@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import axios from "axios";
+import CheckExpress from './CheckExpress.jsx';
 class ExpressJs extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [],
+      user : this.props.name,
+      checkpoint:'hidden',
     };
     this.done=this.done.bind(this);
+    this.getCheckpoint=this.getCheckpoint.bind(this)
   }
   componentDidMount() {
     axios
@@ -17,6 +21,7 @@ class ExpressJs extends Component {
       .catch((err) => {
         throw err;
       });
+      console.log(this.state,'stat')
   }
   done(event,id) {
     event.preventDefault();
@@ -25,10 +30,15 @@ class ExpressJs extends Component {
     .catch(err => console.log(err,'errrr'));
     
   }
+  getCheckpoint(event){
+    event.preventDefault();
+    this.setState({checkpoint:'displayed'})
+  }
   render() {
+    if(this.state.checkpoint ==='hidden'){
+      
     return (
       <div>
-        
         <ul>
           {this.state.data.map((video) => (
             <div key={video._id}>
@@ -49,8 +59,12 @@ class ExpressJs extends Component {
             </div>
           ))}
         </ul>
+        <div > <center><button onClick={(event)=>this.getCheckpoint(event)}>finished</button></center></div>
       </div>
-    );
+    );}
+    else {
+      return(<CheckExpress name={this.state.user}/>)
+    }
   }
 }
 

@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import axios from "axios";
+import CheckNode from './CheckNode.jsx';
 class NodeJs extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [],
+      user : this.props.name,
+      checkpoint:'hidden'
     };
     this.done = this.done.bind(this);
+    this.getCheckpoint=this.getCheckpoint.bind(this);
   }
   componentDidMount() {
     axios
@@ -25,7 +29,12 @@ class NodeJs extends Component {
     .catch(err => console.log(err,'errrr'));
     
   }
+  getCheckpoint(event){
+    event.preventDefault();
+    this.setState({checkpoint:'displayed'})
+  }
   render() {
+    if(this.state.checkpoint === 'hidden'){
     return (
       <div>
         <ul>
@@ -48,8 +57,9 @@ class NodeJs extends Component {
             </div>
           ))}
         </ul>
+        <div > <center><button onClick={(event)=>this.getCheckpoint(event)}>finished</button></center></div>
       </div>
-    );
+    );}else{return<CheckNode name={this.state.user}/>}
   }
 }
 

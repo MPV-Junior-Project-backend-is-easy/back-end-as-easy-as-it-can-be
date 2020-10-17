@@ -41,7 +41,7 @@ export default class Signin extends Component {
   render() {
     if(this.state.check === ""){
       return (
-        <div>
+        <div className="login">
             <input
               type="text"
               placeholder="userName"
@@ -56,9 +56,9 @@ export default class Signin extends Component {
             ></input>
             <button
               id="sign"
-              onClick={(event) => this.signIn(event)}>createAnAccount</button>
+              onClick={(event) => this.signIn(event)}>Create An Account</button>
         </div>
-      );
+      )
     } else {
       return (
         <div>

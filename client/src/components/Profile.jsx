@@ -7,6 +7,7 @@ export default class Profile extends Component {
     super(props);
     this.state = {
       check: "",
+      name : this.props.name
     };
     this.renderExpressTut = this.renderExpressTut.bind(this);
     this.renderMongoTut = this.renderMongoTut.bind(this);
@@ -33,55 +34,55 @@ export default class Profile extends Component {
   render() {
     if (this.state.check === "") {
       return (
-        <div>
-          <div>
-            <span onClick={this.renderNodeTut}>NodeJs</span>
-            <span onClick={this.renderExpressTut}>ExpressJs</span>
-            <span onClick={this.renderMongoTut}>MongoDB</span>
-            <span>Score</span>
-            <span onClick={this.backHome}>Home</span>
+        <div className="themain">
+          <div className="navbar">
+            <span  onClick={this.renderNodeTut}>NodeJs</span>
+            <span  onClick={this.renderExpressTut}>ExpressJs</span>
+            <span  onClick={this.renderMongoTut}>MongoDB</span>
+            <span  className='score'>Score</span>
+            <span onClick={this.backHome} className="home">Home</span>
           </div>
-          <h3>welcome {this.props.name}</h3>
-          <p> Chooose from the courses above</p>
+          <center> <h3 className='introt'>welcome {this.props.name}</h3></center>
+          <center><p className='intro' > Welcome to the free back-end learning space,here you ll have the choice to learn NodeJs , ExpressJs and the famous MongoDB to get started choose your course from the options above and begin your hacking adventure</p></center>
         </div>
       );
     } else if (this.state.check === "Node") {
       return (
         <div>
-          <div>
+          <div className="navbar">
             <span onClick={this.renderNodeTut}>NodeJs</span>
             <span onClick={this.renderExpressTut}>ExpressJs</span>
             <span onClick={this.renderMongoTut}>MongoDB</span>
-            <span>Score</span>
-            <span onClick={this.backHome}>Home</span>
+            <span className='score'>Score</span>
+            <span onClick={this.backHome} className="home">Home</span>
           </div>
-          <NodeJs />
+          <NodeJs name = {this.state.name}/>
         </div>
       );
     } else if (this.state.check === "Mongo") {
       return (
         <div>
-          <div>
+          <div className="navbar">
             <span onClick={this.renderNodeTut}>NodeJs</span>
             <span onClick={this.renderExpressTut}>ExpressJs</span>
             <span onClick={this.renderMongoTut}>MongoDB</span>
-            <span>Score</span>
-            <span onClick={this.backHome}>Home</span>
+            <span className='score'>Score</span>
+            <span onClick={this.backHome} className="home">Home</span>
           </div>
-          <MongoDB/>
+          <MongoDB  name = {this.state.name}/>
         </div>
       );
     } else if (this.state.check === "Express") {
       return (
         <div>
-          <div>
+          <div className="navbar">
             <span onClick={this.renderNodeTut}>NodeJs</span>
             <span onClick={this.renderExpressTut}>ExpressJs</span>
             <span onClick={this.renderMongoTut}>MongoDB</span>
-            <span>Score</span>
-            <span onClick={this.backHome}>Home</span>
+            <span className="score">Score</span>
+            <span onClick={this.backHome} className="home">Home</span>
           </div>
-          <ExpressJs />
+          <ExpressJs  name = {this.state.name}/>
         </div>
       );
     }
