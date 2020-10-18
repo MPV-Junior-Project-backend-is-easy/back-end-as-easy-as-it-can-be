@@ -7,7 +7,7 @@ export default class ProfileUser extends Component {
     super(props);
     this.state = {
       check: "",
-      name : this.props.name
+      name: this.props.name,
     };
     this.renderExpressTut = this.renderExpressTut.bind(this);
     this.renderMongoTut = this.renderMongoTut.bind(this);
@@ -39,11 +39,25 @@ export default class ProfileUser extends Component {
             <span onClick={this.renderNodeTut}>NodeJs</span>
             <span onClick={this.renderExpressTut}>ExpressJs</span>
             <span onClick={this.renderMongoTut}>MongoDB</span>
-            
+
             <span onClick={this.backHome}>Home</span>
           </div>
-          <p> <center> <h3 className='introt'>welcome {this.props.name}</h3></center>
-          <center><p className='intro' > Welcome to the free back-end learning space,here you ll have the choice to learn NodeJs , ExpressJs and the famous MongoDB to get started choose your course from the options above and begin your hacking adventure</p></center></p>
+          <p>
+            {" "}
+            <center>
+              {" "}
+              <h3 className="introt">welcome {this.props.name}</h3>
+            </center>
+            <center>
+              <p className="intro">
+                {" "}
+                Welcome to the free back-end learning space,here you ll have the
+                choice to learn NodeJs , ExpressJs and the famous MongoDB to get
+                started choose your course from the options above and begin your
+                hacking adventure
+              </p>
+            </center>
+          </p>
         </div>
       );
     } else if (this.state.check === "Node") {
@@ -53,10 +67,10 @@ export default class ProfileUser extends Component {
             <span onClick={this.renderNodeTut}>NodeJs</span>
             <span onClick={this.renderExpressTut}>ExpressJs</span>
             <span onClick={this.renderMongoTut}>MongoDB</span>
-            
+
             <span onClick={this.backHome}>Home</span>
           </div>
-          <NodeJs name = {this.state.name}/>
+          <NodeJs name={this.state.name} />
         </div>
       );
     } else if (this.state.check === "Mongo") {
@@ -66,10 +80,10 @@ export default class ProfileUser extends Component {
             <span onClick={this.renderNodeTut}>NodeJs</span>
             <span onClick={this.renderExpressTut}>ExpressJs</span>
             <span onClick={this.renderMongoTut}>MongoDB</span>
-            
+
             <span onClick={this.backHome}>Home</span>
           </div>
-          <MongoDB  name = {this.state.name}/>
+          <MongoDB name={this.state.name} />
         </div>
       );
     } else if (this.state.check === "Express") {
@@ -79,10 +93,10 @@ export default class ProfileUser extends Component {
             <span onClick={this.renderNodeTut}>NodeJs</span>
             <span onClick={this.renderExpressTut}>ExpressJs</span>
             <span onClick={this.renderMongoTut}>MongoDB</span>
-            
+
             <span onClick={this.backHome}>Home</span>
           </div>
-          <ExpressJs  name = {this.state.name}/>
+          <ExpressJs name={this.state.name} />
         </div>
       );
     }
