@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import dataExpress from '../../Quiz/quizExpress';
+import Score from './Score.jsx'
 class CheckExpress extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      user : this.props.name,
       countRightAnswers: 0,
       show:""
     };
@@ -24,15 +26,15 @@ class CheckExpress extends Component {
     const expressData = dataExpress.map((item,key) => (
       <div key={key}>
         <form>
-        <p>{item.question}</p>
+        <p id='checkp'>{item.question}</p>
           <input type="radio" id="option1" onClick={this.counter}/>
-          <label>{item.option1}</label>
+          <label id='lb'>{item.option1}</label>
           <br />
           <input type="radio" id="option2" name="" value="f" />
-          <label>{item.option2}</label>
+          <label id='lb'>{item.option2}</label>
           <br />
           <input type="radio" id="option3" name="" value="" />
-          <label >{item.option3}</label>
+          <label id='lb'>{item.option3}</label>
         </form>
       </div>
     ))
@@ -40,18 +42,13 @@ class CheckExpress extends Component {
       return (
       <div>
         {expressData}
-      <button onClick={this.results}>submit</button>
+      <button id='bb'onClick={this.results}>submit</button>
     
       </div>
     )
     }else {
       return (
-        <div>
-          {expressData}
-        <button onClick={this.results}>submit</button>
-        <p>{this.state.countRightAnswers}</p>
-          {console.log(this.state.countRightAnswers,'count')}
-        </div>
+       <Score result={this.state.countRightAnswers}/>
       )
     }
     

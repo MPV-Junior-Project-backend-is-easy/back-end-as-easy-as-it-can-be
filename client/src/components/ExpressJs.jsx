@@ -6,9 +6,11 @@ class ExpressJs extends Component {
     super(props);
     this.state = {
       data: [],
-      user : this.props.name
+      user : this.props.name,
+      checkpoint:'hidden',
     };
-    this.done=this.done.bind(this);
+    
+    this.getCheckpoint=this.getCheckpoint.bind(this)
   }
   componentDidMount() {
     axios
@@ -19,19 +21,18 @@ class ExpressJs extends Component {
       .catch((err) => {
         throw err;
       });
-      console.log(this.state,'stat')
+      
   }
-  done(event,id) {
+  
+  getCheckpoint(event){
     event.preventDefault();
-    axios.put(`http://localhost:3000/videosExpress/${id}`,{check:'done'})
-    .then(()=>this.componentDidMount())
-    .catch(err => console.log(err,'errrr'));
-    
+    this.setState({checkpoint:'displayed'})
   }
   render() {
+    if(this.state.checkpoint ==='hidden'){
+      
     return (
       <div>
-        
         <ul>
           {this.state.data.map((video) => (
             <div key={video._id}>
@@ -44,17 +45,17 @@ class ExpressJs extends Component {
                   src={video.url}
                 ></iframe>
                 <br></br>
-                <center>
-                <button onClick={(event) =>this.done(event,video._id)}>check ✓</button>
-          <p>{video.check}</p>
-                </center>
+              
               </center>
             </div>
           ))}
         </ul>
-        <CheckExpress/>
+        <div > <center><button id='bb'  onClick={(event)=>this.getCheckpoint(event)}>finished</button></center></div>
       </div>
-    );
+    );}
+    else {
+      return(<CheckExpress name={this.state.user}/>)
+    }
   }
 }
 
